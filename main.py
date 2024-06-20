@@ -1,106 +1,59 @@
-#Quantidade de posição
-position = ["1º", "2º", "3º"]
+import time
 
-#Dicionario para armazenar os dados com as respectivas posições
-posicaoAluno = {"1º": None, "2º": None, "3º": None}
-
-#Lista para armazenar alunos
-alunos = []
-
-#Função para adicionar alunos
-def nomeAlunos():
-  print("Nome dos alunos(É necessario no minimo três(3) nomes para determinar o Ranking):\n")
-  #Variavel para numerar a quantidade de alunos
-  i = 1
-  
-  #Loop para adicionar os nomes dos alunos sem ter um limite em mente
-  while True:
-    nome = input(f'Digite o nome do {i}º aluno ou digite "s" para sair: ')
-    if nome.lower() == "s":
-      if len(alunos) == 0:
-        print("\n\t\tLista vazia")
-        break
-      else:
-        print(f"\nLista encerrada. Foi adicionado {i - 1} alunos!")
-        break
-    else:
-      alunos.append(nome)
-    i += 1
-
-def listaAlunos():
-  print("\nLista de alunos:\n")
-  if len(alunos) == 0:
-    print("\t\tLista vazia!\n\nNenhum aluno adicionado ainda!\n\n")
-  for i, aluno in enumerate(alunos):
-    print(f"{i + 1} - {aluno}")
-
-#Função para mostrar as posições disponiveis
-def ranking():
-  print("\nPosições:\n")
-  for posicao in position:
-    print(f"{posicao} - ")
-
-
-#Função para determinar a posição dos alunos
-def escolhaPosicao():
-  if len(alunos) == 0:
-    print("\n\t\tLista vazia!, impossivel determinar posições!")
-  elif len(alunos) < 3:
-    print("\n\t\tQuantidade insuficiente de alunos para determinar as posições!")
-  elif len(alunos) >= 3:
-  
-  #Loop para criar uma variavel que percorre a lista de posição
-    for i in range(1,4):
-      posicao = position[i-1]
-      #Loop para que o usuario escolha o aluno para determinada posição mediante a variavel criada que percorre a lista de posição
-      while True:
-        pos = input(f"\nDiga quem ficou em {posicao} lugar: ")
-        #Condição para que seja apenas aceitado quem está na lista em alunos
-        if pos in alunos:
-          #Codição para verificar se a posição já foi preenchida
-          if posicaoAluno[position[i-1]] is None:
-            posicaoAluno[position[i-1]] = pos
-            print(f"\n{posicao} - {pos}\n")
-          break
-        else:
-          print("\nAluno não encontrado, tente novamente\n")
-
-#Apenas para mostrar como ficou o Ranking
-def rankingPreenchido():
-  print("\nRanking:\n")
-  for posicao in position:
-    print(f"{posicao} - {posicaoAluno[posicao]}\n")
-
-
+from functions.nomeAlunos import nomeAlunos
+from functions.listaAlunos import listaAlunos
+from functions.ranking import ranking
+from functions.adicionarNotas import adicionarNotas
+from functions.atribuicaoRank import atribuicaoRank
+from functions.rankingPreenchido import rankingPreenchido
+import limpar
 
 
 while True:
+  limpar.limparConsole()
   print("\nAções disponiveis:\n")
   print("\n1. Adicionar alunos\n")
   print("2. Lista de alunos\n")
-  print("3. Ver Ranking\n")
-  print("4. Determinar Ranking\n")
-  print("5. Ranking Preenchido\n")
-  print("6. Encerrar Sistema\n\n")
+  print("3. Posições disponiveis\n")
+  print("4. Adicionar notas dos alunos\n")
+  print("5. Determinar Ranking\n")
+  print("6. Ranking Preenchido\n")
+  print("7. Encerrar Sistema\n\n")
   escolha = int(input("Escolha a ação que deseja: "))
 
   if escolha == 1:
     print("")
+    limpar.limparConsole()
     nomeAlunos()
-    print("")
+    time.sleep(3)
+    
   elif escolha == 2:
+    limpar.limparConsole()
     listaAlunos()
+    time.sleep(3)
   elif escolha == 3:
+    limpar.limparConsole()
     ranking()
-    print("")
+    time.sleep(3)
+    
   elif escolha == 4:
-    escolhaPosicao()
-    print("")
+    limpar.limparConsole()
+    adicionarNotas()
+    time.sleep(3)
   elif escolha == 5:
-      rankingPreenchido()
-      print("")
+    limpar.limparConsole()
+    atribuicaoRank()
+    time.sleep(3)
+    
   elif escolha == 6:
+      limpar.limparConsole()
+      rankingPreenchido()
+      time.sleep(3)
+      
+  elif escolha == 7:
+    limpar.limparConsole()
     print("\n\nSistema encerrado. Até logo!")
+    time.sleep(2)
     break
   else:
     print("Alternativa invalida, tente novamente")
@@ -110,9 +63,9 @@ while True:
   
 '''
 
-Ideias para o futuro:
+IDEIAS PARA O FUTURO:
 
-- Adicionar um controle (Trazer um sistema que deixa o usuario escolher que quer fazer, se quer adicionar alunos, adicionar notas, etc) - [FEITO PARCIALMENTE]
+- Adicionar um controle (Trazer um sistema que deixa o usuario escolher o que quer fazer, se quer adicionar alunos, notas e desempenho) - [FEITO PARCIALMENTE]
 
 - Adicionar objetividade (Notas/presença/desempenho) - 
 
@@ -122,11 +75,30 @@ Ideias para o futuro:
 
 - Adicionar uma implementação para adicionar alunos novos - [FEITO]
 
-Implementações adicionadas sem serem previstas
+- Adicionar transições para resultados da escolha, por exemplo para limpar a tela e deixar o usuario preenchendo os dados, depois de finalizar, limpa a tela e volta para o menu principal - [FEITO]
 
-º - Adicionado especificações para que o sistema informe questões especificas: Mensagem para lista vazia, mensagem para informar quantos alunos foram adicionados. 
+- Adicionar uma funcionalidade na qual uma opção só irá aparecer se o usuario executar outra função, por exemplo, a função "adicionar as notas" não irá aparecer nas escolhas se o usuario não adicionar os alunos (Pode ser vir para outras escolhas tambem para que seja otimizado o codigo)
+ 
+- Adicionar Materias (Para contexto escolar)
 
-º - Adicionado um controle na questão de determinar o ranking: Só poderá determinar a posição dos alunos se houver pelo menos 3 alunos.
+IMPLEMENTAÇÕES JÁ ADICIONADAS SEM SEREM PREVISTAS
 
+º - Adicionado especificações para que o sistema informe questões especificas, como por exemplo: Mensagem para lista vazia; Mensagem para informar quantos alunos foram adicionados e etc. 
 
+º - Adicionado um controle na questão de determinar o ranking: Só poderá determinar a posição dos alunos se houver pelo menos 3 alunos. (MODIFICAÇÃO - Alem de ter os alunos, é necessario nota tambem) 
+
+º - Adicionado a logica de que em atribuição de notas, caso o usuario sair e deixar de atribuir a nota dos alunos restantes, posteriormente ele poderá dar continuidade de onde parou.
+
+ERROS 
+
+- Erro em adicionar nota de alunos: 
+
+  Caso o usuario digite "s" para sair, ele não sai e já pula para o proximo aluno; - [RESOLVIDO]
+  
+  Caso o usuario não insira um valor numerico, ele avisa que só pode inserir um valor numerico e pula para o proximo aluno - [RESOLVIDO]
+
+- Erro em determinar o ranking:
+
+  Caso o usuario selecionar, pode dar algum erro e quebrar o codigo. E ainda assim indica que a atribuição foi feita com sucesso. - [RESOLVIDO]
+  
 '''

@@ -15,7 +15,7 @@ def atribuicaoRank():
   #Loop para atribuir as 3 posições
     for i in range(3):
       dados.posicaoAluno[dados.position[i]] = dados.alunos[indicesMaiorMenor[i]]
-      print(f"\n{dados.position[i]} - {dados.alunos[indicesMaiorMenor[i]]}\n")
+      print(f"\n{dados.position[i]} -{dados.alunos[indicesMaiorMenor[i]]}\n") 
 
     if all(value is not None for value in dados.posicaoAluno.values()):
       print("\n\t\tPosições determinadas com sucesso!")

@@ -4,4 +4,4 @@ Nesse sistemas tem varias etapas na qual devem se respeitar, como por exemplo n�
 
 O projeto foi idealizado em outra linguagem, porem como Python já estou com mais conhecimento, preferir traduzir o projeto para está linguagem com muito mais profundidade, com mais complexidade
 
-* Posteriormente adicionarei explicações detalhadas com a visualização do codigo!
+*Obs: **Posteriormente adicionarei explicações detalhadas com a visualização do codigo!***
